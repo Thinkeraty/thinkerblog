@@ -2,6 +2,9 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 
+//mongodb+srv://Samyak:7Roqe5auvYIczB2@cluster0-wa6b6.mongodb.net/test?retryWrites=true&w=majority
+//7OafTj0w1hFfP42k
+
 const express = require('express')
 const Article = require('./models/article')
 const articleRouter = require('./routes/articles')
@@ -20,7 +23,8 @@ app.get('/', async (req, res) => {
 const mongoose = require('mongoose')
 mongoose.connect(process.env.DATABASE_URL, { 
   useNewUrlParser: true,
-  useUnifiedTopology: true })
+  useUnifiedTopology: true,
+  useCreateIndex: true })
 const db = mongoose.connection
 db.on('error', error => console.error(error))
 db.once('open', () => console.log('Connected to Mongoose'))
