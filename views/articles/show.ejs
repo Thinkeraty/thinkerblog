@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script type="text/javascript" src="https://l2.io/ip.js?var=userip"></script>
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>ThinkerBlog</title>
   <br>
@@ -54,8 +55,21 @@ background: #1abc9c;
       <%= article.createdAt.toLocaleDateString() %>
     </div>
     <a href="/" class="btn btn-secondary">All Articles</a>
-    <a href="/articles/edit/<%= article.id %>" class="btn btn-info">Edit</a>
+    <span id="edit"></span>
+    <!--<a href="articles/edit/<%= article.id %>" class="btn btn-info">Edit</a>-->
+    <script>
+      var masterIp = "203.81.241.117";
+      var userip;
+      var edit;
+      edit = document.getElementById("edit");
 
+      if(userip == masterIp) {
+          edit.innerHTML = "<a href='articles/edit/<%= article.id %>' class='btn btn-info'>Edit</a>";
+      } else {
+        edit.innerHTML= " ";
+      }
+
+    </script>
     <div>
       <%- article.sanitizedHtml %>
     </div>

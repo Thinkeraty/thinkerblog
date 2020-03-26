@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script type="text/javascript" src="https://l2.io/ip.js?var=userip"></script>
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>ThinkerBlog</title>
   <br>
@@ -47,6 +48,11 @@ background: #1abc9c;
     width: 100%;
   }
 </style>
+<script>
+  var masterIp = "203.81.241.117";
+  var userip;
+</script>
+</head> 
 <body>
   <div class="container">
     <h1 class="mb-4">Blog Articles</h1>
@@ -61,9 +67,33 @@ background: #1abc9c;
           </div>
           <div class="card-text mb-2"><%= article.description %></div>
           <a href="articles/<%= article.slug %>" class="btn btn-primary">Read More</a>
-          <a href="articles/edit/<%= article.id %>" class="btn btn-info">Edit</a>
+          <span id="edit">
+            <script>
+              var edit;
+              edit = document.getElementById("edit");
+                if(userip == masterIp) {
+                    edit.innerHTML = "<a href='articles/edit/<%= article.id %>' class='btn btn-info'>Edit</a>";
+                } else {
+                  edit.innerHTML= " ";
+                }
+            </script>
+          </span>
+          <!--<a href="articles/edit/<%= article.id %>" class="btn btn-info">Edit</a>-->
           <form action="/articles/<%= article.id %>?_method=DELETE" method="POST" class="d-inline">
-            <button type="submit" class="btn btn-danger">Delete</button>
+            <!--<button type="submit" class="btn btn-danger">Delete</button>-->
+            <span id="del">
+
+              <script>
+                var del;
+                del = document.getElementById("del");
+                if(userip == masterIp) {
+                  del.innerHTML = "<button type='submit' class='btn btn-danger'>Delete</button>";
+                } else {
+                  del.innerHTML = " ";
+                }
+              </script>
+            </span>
+
           </form>
         </div>
       </div>
